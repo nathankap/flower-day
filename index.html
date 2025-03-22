@@ -88,6 +88,8 @@
             "if you were a flower youd be a damn-delion",
             "im head clover heels in love w you"
         ];
+        
+        let usedMessages = [];
 
         document.getElementById("terms-form").addEventListener("submit", function(event) {
             event.preventDefault();
@@ -104,6 +106,9 @@
             
             for (let i = 0; i < flowersToShow; i++) {
                 let index = Math.floor(Math.random() * messages.length);
+                let message = messages.splice(index, 1)[0];
+                usedMessages.push(message);
+                
                 let flower = document.createElement("div");
                 flower.classList.add("flower");
                 flower.style.left = Math.random() * 80 + "vw";
@@ -111,14 +116,13 @@
                 flower.innerText = "🌸";
                 
                 flower.onclick = function() { 
-                    flower.innerText = messages[index];
+                    flower.innerText = message;
                     flower.style.fontSize = "14px";
                     flower.style.color = "#ff4081";
                     flower.style.textAlign = "center";
                 };
                 
                 container.appendChild(flower);
-                messages.splice(index, 1);
             }
             
             if (messages.length === 0) {
