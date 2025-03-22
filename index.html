@@ -47,12 +47,9 @@
             position: relative;
         }
         .flower {
-            width: 50px;
-            height: 50px;
-            background: radial-gradient(circle, #ff4081 40%, transparent 50%);
-            border-radius: 50%;
-            position: absolute;
+            font-size: 30px;
             cursor: pointer;
+            position: absolute;
         }
     </style>
 </head>
@@ -71,6 +68,7 @@
     
     <div id="flowers-page">
         <h1>Happy National Flowers Day, Dawt <3 🌸🌼🌺</h1>
+        <p>Click on the flowers!</p>
         <button onclick="generateFlowers()">Shake for More Flowers</button>
         <div id="flowers-container"></div>
     </div>
@@ -109,14 +107,12 @@
                 flower.classList.add("flower");
                 flower.style.left = Math.random() * 80 + "vw";
                 flower.style.top = Math.random() * 80 + "vh";
+                flower.innerText = "🌸";
                 flower.onclick = function() { 
                     flower.innerText = messages[index];
-                    flower.style.background = "none";
-                    flower.style.color = "#ff4081";
                     flower.style.fontSize = "14px";
+                    flower.style.color = "#ff4081";
                     flower.style.textAlign = "center";
-                    flower.style.width = "auto";
-                    flower.style.height = "auto";
                 };
                 container.appendChild(flower);
                 messages.splice(index, 1);
