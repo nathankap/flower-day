@@ -69,12 +69,12 @@
     <div id="flowers-page">
         <h1>Happy National Flowers Day, Dawt <3 🌸🌼🌺</h1>
         <p>Click on the flowers!</p>
-        <button onclick="generateFlowers()">Shake for More Flowers</button>
+        <button id="shake-btn" onclick="generateFlowers()">Shake for More Flowers</button>
         <div id="flowers-container"></div>
     </div>
 
     <script>
-        const messages = [
+        let messages = [
             "ka lo duhDAWT",
             "pangpar hnakin na mawi",
             "nitleu bangin ka nunnak na tleu ter",
@@ -100,22 +100,29 @@
             let container = document.getElementById("flowers-container");
             container.innerHTML = "";
             let batchSize = 4;
-            for (let i = 0; i < batchSize; i++) {
-                if (messages.length === 0) return;
+            let flowersToShow = Math.min(batchSize, messages.length);
+            
+            for (let i = 0; i < flowersToShow; i++) {
                 let index = Math.floor(Math.random() * messages.length);
                 let flower = document.createElement("div");
                 flower.classList.add("flower");
                 flower.style.left = Math.random() * 80 + "vw";
                 flower.style.top = Math.random() * 80 + "vh";
                 flower.innerText = "🌸";
+                
                 flower.onclick = function() { 
                     flower.innerText = messages[index];
                     flower.style.fontSize = "14px";
                     flower.style.color = "#ff4081";
                     flower.style.textAlign = "center";
                 };
+                
                 container.appendChild(flower);
                 messages.splice(index, 1);
+            }
+            
+            if (messages.length === 0) {
+                document.getElementById("shake-btn").style.display = "none";
             }
         }
     </script>
