@@ -14,6 +14,7 @@
             font-family: Arial, sans-serif;
             text-align: center;
             flex-direction: column;
+            overflow: hidden;
         }
         .container {
             background: white;
@@ -43,20 +44,33 @@
             height: 100vh;
             justify-content: center;
             background-color: #ffdde1;
-            overflow: hidden;
+            position: relative;
+        }
+        .flower, .butterfly {
+            position: absolute;
+            cursor: pointer;
         }
         .flower {
-            position: absolute;
-            width: 30px;
-            height: 30px;
+            width: 40px;
+            height: 40px;
             background: radial-gradient(circle, #ff4081 40%, transparent 50%);
             border-radius: 50%;
             animation: float 6s infinite ease-in-out;
+        }
+        .butterfly {
+            width: 50px;
+            height: 50px;
+            background: url('https://i.imgur.com/NrF5hSE.png') no-repeat center/contain;
+            animation: flutter 4s infinite alternate;
         }
         @keyframes float {
             0% { transform: translateY(100vh) scale(0.8); opacity: 0; }
             50% { opacity: 1; }
             100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+        }
+        @keyframes flutter {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(20px); }
         }
     </style>
 </head>
@@ -74,10 +88,26 @@
     </div>
     
     <div id="flowers-page">
-        <h1>Happy National Flowers Day! 🌸🌼🌺</h1>
+        <h1>Happy National Flowers Day, Dawt <3 🌸🌼🌺</h1>
+        <button onclick="generateFlowers()">Shake for More Flowers</button>
     </div>
 
     <script>
+        const messages = [
+            "ka lo duhDAWT",
+            "pangpar hnakin na mawi",
+            "nitleu bangin ka nunnak na tleu ter",
+            "pangpar in ruah a haal bangin nangmah ka lo haal",
+            "i love you",
+            "i wanna kiss your tulips",
+            "you're so iris-istible",
+            "i think abt you every daisy",
+            "i wet my plants when i see you",
+            "i cant be-leaf youre mine",
+            "if you were a flower youd be a damn-delion",
+            "im head clover heels in love w you"
+        ];
+
         document.getElementById("terms-form").addEventListener("submit", function(event) {
             event.preventDefault();
             document.getElementById("terms-page").style.display = "none";
@@ -86,13 +116,18 @@
         });
 
         function generateFlowers() {
-            for (let i = 0; i < 30; i++) {
+            document.getElementById("flowers-page").innerHTML = '<h1>Happy National Flowers Day, Dawt <3 🌸🌼🌺</h1><button onclick="generateFlowers()">Shake for More Flowers</button>';
+            let usedMessages = [];
+            for (let i = 0; i < 5; i++) {
+                if (messages.length === 0) break;
+                let index = Math.floor(Math.random() * messages.length);
                 let flower = document.createElement("div");
                 flower.classList.add("flower");
                 flower.style.left = Math.random() * 100 + "vw";
-                flower.style.animationDuration = Math.random() * 3 + 3 + "s";
+                flower.style.top = Math.random() * 80 + "vh";
+                flower.onclick = function() { alert(messages[index]); };
                 document.getElementById("flowers-page").appendChild(flower);
-                setTimeout(() => { flower.remove(); }, 6000);
+                usedMessages.push(messages.splice(index, 1)[0]);
             }
         }
     </script>
