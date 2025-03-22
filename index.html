@@ -10,32 +10,39 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #fff0f6;
-            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #f3e7e9, #e3eeff);
+            font-family: "Poppins", sans-serif;
             text-align: center;
             flex-direction: column;
             overflow: hidden;
         }
         .container {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            max-width: 300px;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            max-width: 350px;
+            text-align: left;
         }
         label {
             display: block;
             margin: 10px 0;
+            font-size: 14px;
+            font-weight: bold;
         }
         button {
             margin-top: 20px;
-            padding: 10px;
-            background-color: #ff85a2;
+            padding: 12px;
+            background: linear-gradient(45deg, #ff758c, #ff7eb3);
             border: none;
             color: white;
             font-size: 16px;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
+            transition: transform 0.2s;
+        }
+        button:hover {
+            transform: scale(1.1);
         }
         #flowers-page {
             display: none;
@@ -43,48 +50,40 @@
             align-items: center;
             height: 100vh;
             justify-content: center;
-            background-color: #ffdde1;
+            background: linear-gradient(135deg, #ffdde1, #f5d0fe);
             position: relative;
         }
         .flower {
-            font-size: 30px;
+            font-size: 32px;
             cursor: pointer;
             position: absolute;
+            transition: transform 0.3s ease-in-out;
         }
-        /* Beautiful Flower Animation */
-        .flower-animation {
-            position: absolute;
-            bottom: 10px;
-            width: 100px;
-            height: 100px;
-            animation: bloom 3s infinite alternate;
-        }
-        @keyframes bloom {
-            0% { transform: scale(0.5); opacity: 0.5; }
-            100% { transform: scale(1.2); opacity: 1; }
+        .flower:hover {
+            transform: rotate(15deg) scale(1.2);
         }
     </style>
 </head>
 <body>
     <div id="terms-page" class="container">
-        <h2>Terms & Conditions</h2>
+        <h2>Read and Accept</h2>
         <form id="terms-form">
-            <label><input type="checkbox" required> I acknowledge that my bf is broke.</label>
-            <label><input type="checkbox" required> I acknowledge that my bf has no way of giving me flowers since he doesn’t want me to use my friends.</label>
-            <label><input type="checkbox" required> I acknowledge that my bf loves me more than anything.</label>
-            <label><input type="checkbox" required> I acknowledge that if my bf could get me flowers, he would.</label>
-            <label><input type="checkbox" required> I still love my bf even though he could only do this for me.</label>
+            <label><input type="checkbox" required> I understand my bf is broke, but he tries.</label>
+            <label><input type="checkbox" required> I accept that my bf wants to get me real flowers.</label>
+            <label><input type="checkbox" required> I acknowledge that my bf loves me endlessly.</label>
+            <label><input type="checkbox" required> If he could, he’d shower me in flowers daily.</label>
+            <label><input type="checkbox" required> I love my bf no matter what.</label>
             <button type="submit">I Accept</button>
         </form>
     </div>
     
     <div id="flowers-page">
-        <h1>Happy National Flowers Day, Dawt <3 🌸🌼🌺</h1>
-        <p>Click on the flowers!</p>
-        <button id="shake-btn" onclick="generateFlowers()">Shake for More Flowers</button>
+        <h1>Happy National Flowers Day, Dawt! 💐</h1>
+        <p>Click the flowers to reveal sweet messages!</p>
+        <button id="shake-btn" onclick="generateFlowers()">More Flowers</button>
         <div id="flowers-container"></div>
     </div>
-
+    
     <script>
         let messages = [
             "ka lo duhDAWT",
@@ -101,8 +100,6 @@
             "im head clover heels in love w you"
         ];
         
-        let usedMessages = [];
-
         document.getElementById("terms-form").addEventListener("submit", function(event) {
             event.preventDefault();
             document.getElementById("terms-page").style.display = "none";
@@ -113,32 +110,27 @@
         function generateFlowers() {
             let container = document.getElementById("flowers-container");
             container.innerHTML = "";
-            let batchSize = 4;
-            let flowersToShow = Math.min(batchSize, messages.length);
             
-            for (let i = 0; i < flowersToShow; i++) {
+            let batchSize = 5;
+            for (let i = 0; i < batchSize; i++) {
+                if (messages.length === 0) break;
                 let index = Math.floor(Math.random() * messages.length);
                 let message = messages.splice(index, 1)[0];
-                usedMessages.push(message);
                 
                 let flower = document.createElement("div");
                 flower.classList.add("flower");
                 flower.style.left = Math.random() * 80 + "vw";
                 flower.style.top = Math.random() * 80 + "vh";
-                flower.innerText = "🌸";
+                flower.innerText = "🌷";
                 
-                flower.onclick = function() { 
+                flower.onclick = function() {
                     flower.innerText = message;
-                    flower.style.fontSize = "14px";
+                    flower.style.fontSize = "16px";
                     flower.style.color = "#ff4081";
                     flower.style.textAlign = "center";
                 };
                 
                 container.appendChild(flower);
-            }
-            
-            if (messages.length === 0) {
-                document.getElementById("shake-btn").style.display = "none";
             }
         }
     </script>
