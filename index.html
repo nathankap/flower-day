@@ -46,31 +46,13 @@
             background-color: #ffdde1;
             position: relative;
         }
-        .flower, .butterfly {
-            position: absolute;
-            cursor: pointer;
-        }
         .flower {
-            width: 40px;
-            height: 40px;
-            background: radial-gradient(circle, #ff4081 40%, transparent 50%);
-            border-radius: 50%;
-            animation: float 6s infinite ease-in-out;
-        }
-        .butterfly {
             width: 50px;
             height: 50px;
-            background: url('https://i.imgur.com/NrF5hSE.png') no-repeat center/contain;
-            animation: flutter 4s infinite alternate;
-        }
-        @keyframes float {
-            0% { transform: translateY(100vh) scale(0.8); opacity: 0; }
-            50% { opacity: 1; }
-            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
-        }
-        @keyframes flutter {
-            0% { transform: translateY(0px); }
-            100% { transform: translateY(20px); }
+            background: radial-gradient(circle, #ff4081 40%, transparent 50%);
+            border-radius: 50%;
+            position: absolute;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -90,6 +72,7 @@
     <div id="flowers-page">
         <h1>Happy National Flowers Day, Dawt <3 🌸🌼🌺</h1>
         <button onclick="generateFlowers()">Shake for More Flowers</button>
+        <div id="flowers-container"></div>
     </div>
 
     <script>
@@ -116,18 +99,27 @@
         });
 
         function generateFlowers() {
-            document.getElementById("flowers-page").innerHTML = '<h1>Happy National Flowers Day, Dawt <3 🌸🌼🌺</h1><button onclick="generateFlowers()">Shake for More Flowers</button>';
-            let usedMessages = [];
-            for (let i = 0; i < 5; i++) {
-                if (messages.length === 0) break;
+            let container = document.getElementById("flowers-container");
+            container.innerHTML = "";
+            let batchSize = 4;
+            for (let i = 0; i < batchSize; i++) {
+                if (messages.length === 0) return;
                 let index = Math.floor(Math.random() * messages.length);
                 let flower = document.createElement("div");
                 flower.classList.add("flower");
-                flower.style.left = Math.random() * 100 + "vw";
+                flower.style.left = Math.random() * 80 + "vw";
                 flower.style.top = Math.random() * 80 + "vh";
-                flower.onclick = function() { alert(messages[index]); };
-                document.getElementById("flowers-page").appendChild(flower);
-                usedMessages.push(messages.splice(index, 1)[0]);
+                flower.onclick = function() { 
+                    flower.innerText = messages[index];
+                    flower.style.background = "none";
+                    flower.style.color = "#ff4081";
+                    flower.style.fontSize = "14px";
+                    flower.style.textAlign = "center";
+                    flower.style.width = "auto";
+                    flower.style.height = "auto";
+                };
+                container.appendChild(flower);
+                messages.splice(index, 1);
             }
         }
     </script>
