@@ -51,16 +51,6 @@
             cursor: pointer;
             position: absolute;
         }
-        .blooming-flower {
-            position: absolute;
-            bottom: 10%;
-            animation: bloom 3s ease-in-out infinite alternate;
-            font-size: 40px;
-        }
-        @keyframes bloom {
-            0% { transform: scale(0.5); opacity: 0.5; }
-            100% { transform: scale(1.2); opacity: 1; }
-        }
     </style>
 </head>
 <body>
@@ -81,7 +71,6 @@
         <p>Click on the flowers!</p>
         <button id="shake-btn" onclick="generateFlowers()">Shake for More Flowers</button>
         <div id="flowers-container"></div>
-        <div class="blooming-flower">🌺</div>
     </div>
 
     <script>
